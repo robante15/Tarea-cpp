@@ -69,6 +69,26 @@ void reportarListaGenero(Glista lista)
      }
 }
 
+void buscarElementoGenero(Glista lista, string valor1)
+{
+    Glista g = lista;
+    int i = 1, band = 0;
+
+    while(g!=NULL)
+    {
+        if(g->genero==valor1)
+        {
+            cout<<endl<<" Encontrada en posicion "<< i <<endl;
+            band = 1;
+        }
+        g = g->sgte;
+        i++;
+    }
+
+    if(band==0)
+        cout<<"\n\n Genero no encontrado..!"<< endl;
+}
+
 int main(){
 
 //Variables necesarias para gestionar el menu
@@ -99,6 +119,7 @@ cout << white <<"Opcion 5. " << normal <<"Listar los elementos en las listas."<<
 cout << white <<"Opcion 6. " << normal <<"Salir.\n"<< endl;
 
 cout << white <<"Ingrese una opcion: " << normal;
+
 opcionMultiple = getch();
 
 switch (opcionMultiple){
@@ -120,7 +141,8 @@ switch (opcionMultiple){
 
     case '3':
         system("cls");
-        cout<<"Opcion 3"<<endl;
+        cout<<"\n Valor a buscar: "; cin>> valGenero;
+        buscarElementoGenero(lista, valGenero);
         system("pause");
         break;
 
