@@ -24,6 +24,70 @@ La interfaz de usuario y las validaciones tienen un 40% de ponderación.
 fecha de entrega Jueves 11.
 */
 
+//Todo el codigo para trabajar con pelicula
+struct nodoPelicula{
+       string pelicula;
+       struct nodoPelicula *sgte;
+};
+
+typedef struct nodoPelicula *Plista;
+
+void insertarPelicula(Plista &lista1, string valor1)
+{
+    Plista t, p = new(struct nodoPelicula);
+
+    p->pelicula= valor1;
+
+    p->sgte = NULL;
+
+    if(lista1==NULL)
+    {
+        lista1 = p;
+    }
+    else
+    {
+        t = lista1;
+        while(t->sgte!=NULL)
+        {
+            t = t->sgte;
+        }
+        t->sgte = p;
+    }
+}
+
+void reportarListaPelicula(Plista lista1)
+{
+     int i = 0;
+
+     while(lista1 != NULL)
+     {
+          cout <<' '<< i+1 <<") ";
+          cout << white << "Pelicula: " << normal <<lista1->pelicula << endl << endl;
+          lista1 = lista1->sgte;
+          i++;
+     }
+}
+
+void buscarElementoPelicula(Plista lista1, string valor1)
+{
+    Plista p = lista1;
+    int i = 1, band = 0;
+
+    while(p!=NULL)
+    {
+        if(p->pelicula==valor1)
+        {
+            cout<<endl<<" Encontrada en posicion: "<< i <<endl;
+            band = 1;
+        }
+        p = p->sgte;
+        i++;
+    }
+
+    if(band==0)
+        cout<<"\n\nError: Pelicula no encontrada."<< endl;
+}
+
 
 //Todo el codigo para trabajar con genero
 struct nodoGenero{
@@ -33,7 +97,7 @@ struct nodoGenero{
 
 typedef struct nodoGenero *Glista;
 
-void insertarGenero(Glista &lista, string valor1)
+void insertarGenero(Glista &lista2, string valor1)
 {
     Glista t, g = new(struct nodoGenero);
 
@@ -41,13 +105,13 @@ void insertarGenero(Glista &lista, string valor1)
 
     g->sgte = NULL;
 
-    if(lista==NULL)
+    if(lista2==NULL)
     {
-        lista = g;
+        lista2 = g;
     }
     else
     {
-        t = lista;
+        t = lista2;
         while(t->sgte!=NULL)
         {
             t = t->sgte;
@@ -56,22 +120,22 @@ void insertarGenero(Glista &lista, string valor1)
     }
 }
 
-void reportarListaGenero(Glista lista)
+void reportarListaGenero(Glista lista2)
 {
      int i = 0;
 
-     while(lista != NULL)
+     while(lista2 != NULL)
      {
           cout <<' '<< i+1 <<") ";
-          cout << white << "Genero: " << normal <<lista->genero << endl << endl;
-          lista = lista->sgte;
+          cout << white << "Genero: " << normal <<lista2->genero << endl << endl;
+          lista2 = lista2->sgte;
           i++;
      }
 }
 
-void buscarElementoGenero(Glista lista, string valor1)
+void buscarElementoGenero(Glista lista2, string valor1)
 {
-    Glista g = lista;
+    Glista g = lista2;
     int i = 1, band = 0;
 
     while(g!=NULL)
@@ -98,7 +162,8 @@ string valPelicula;
 string valGenero;
 string valProductores;
 
-Glista lista = NULL; //Glista -> Lista de los generos
+Glista lista2 = NULL; //Glista -> Lista de los generos
+Plista lista1 = NULL; //Plista -> Lista de las peliculas
 
 do{
 
@@ -127,9 +192,14 @@ switch (opcionMultiple){
     case '1':
         system("cls");
 
+        cout<< "\n Pelicula: ";
+        cin >> valPelicula;
+        insertarPelicula(lista1, valPelicula);
+
+
         cout<< "\n Genero: ";
         cin >> valGenero;
-        insertarGenero(lista, valGenero);
+        insertarGenero(lista2, valGenero);
 
         system("pause");
         break;
@@ -142,7 +212,7 @@ switch (opcionMultiple){
     case '3':
         system("cls");
         cout<<"\n Valor a buscar: "; cin>> valGenero;
-        buscarElementoGenero(lista, valGenero);
+        buscarElementoGenero(lista2, valGenero);
         system("pause");
         break;
 
@@ -155,7 +225,8 @@ switch (opcionMultiple){
     case '5':
         system("cls");
         cout << "\n\nMostrando la Informacion\n\n";
-        reportarListaGenero(lista);
+        reportarListaPelicula(lista1);
+        reportarListaGenero(lista2);
         system("pause");
         break;
 
