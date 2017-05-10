@@ -1,8 +1,11 @@
 #include <iostream>
 #include <stdlib.h>
 #include <string.h>
+#include "concolor.h"
 
 using namespace std;
+//Lo de los colores lo saque de esta web: http://johny65corp.blogspot.com/2011/05/consola-con-colores-en-c.html
+
 /*
 Genero,Peliculas y Productores
 
@@ -36,16 +39,21 @@ do{
 
 system("CLS");
 
-cout << "Genero, Peliculas y Productores\n"<< endl;
+cout << white << "------------------------------------------" << endl;
+cout << white << "|         Listas enlazadas simples       |"<< endl;
+cout << white << "|                                        |"<< endl;
+cout << white << "|    Genero, Peliculas y Productores     |"<< endl;
+cout << white << "------------------------------------------\n" << endl;
 
-cout <<"Opcion 1. Agregar elementos a las pilas."<< endl;
-cout <<"Opcion 2. Modificar elementos en las pilas."<< endl;
-cout <<"Opcion 3. Buscar elementos en las pilas."<< endl;
-cout <<"Opcion 4. Eliminar elementos de las pilas."<< endl;
-cout <<"Opcion 5. Listar los elementos en las listas."<< endl;
-cout <<"Opcion 6. Salir.\n"<< endl;
 
-cout <<"Ingrese una opcion: " << endl;
+cout << white <<"Opcion 1. " << normal <<"Agregar elementos a las pilas."<< endl;
+cout << white <<"Opcion 2. " << normal <<"Modificar elementos en las pilas."<< endl;
+cout << white <<"Opcion 3. " << normal <<"Buscar elementos en las pilas."<< endl;
+cout << white <<"Opcion 4. " << normal <<"Eliminar elementos de las pilas."<< endl;
+cout << white <<"Opcion 5. " << normal <<"Listar los elementos en las listas."<< endl;
+cout << white <<"Opcion 6. " << normal <<"Salir.\n"<< endl;
+
+cout << white <<"Ingrese una opcion: " << normal;
 cin>>opcionMultiple;
 
 switch (opcionMultiple){
