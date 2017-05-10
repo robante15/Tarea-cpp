@@ -153,6 +153,70 @@ void buscarElementoGenero(Glista lista2, string valor1)
         cout<<"\n\n Genero no encontrado..!"<< endl;
 }
 
+//Todo el codigo para trabajar con productor
+struct nodoProductor{
+       string productor;
+       struct nodoProductor *sgte;
+};
+
+typedef struct nodoProductor *Prolista;
+
+void insertarProductor(Prolista &lista3, string valor1)
+{
+    Prolista t, pro = new(struct nodoProductor);
+
+    pro->productor= valor1;
+
+    pro->sgte = NULL;
+
+    if(lista3==NULL)
+    {
+        lista3 = pro;
+    }
+    else
+    {
+        t = lista3;
+        while(t->sgte!=NULL)
+        {
+            t = t->sgte;
+        }
+        t->sgte = pro;
+    }
+}
+
+void reportarListaProductor(Prolista lista3)
+{
+     int i = 0;
+
+     while(lista3 != NULL)
+     {
+          cout <<' '<< i+1 <<") ";
+          cout << white << "Productor: " << normal <<lista3->productor << endl << endl;
+          lista3 = lista3->sgte;
+          i++;
+     }
+}
+
+void buscarElementoProductor(Prolista lista3, string valor1)
+{
+    Prolista pro = lista3;
+    int i = 1, band = 0;
+
+    while(pro!=NULL)
+    {
+        if(pro->productor==valor1)
+        {
+            cout<<endl<<" Encontrada en posicion "<< i <<endl;
+            band = 1;
+        }
+        pro = pro->sgte;
+        i++;
+    }
+
+    if(band==0)
+        cout<<"\n\n Productor no encontrado..!"<< endl;
+}
+
 int main(){
 
 //Variables necesarias para gestionar el menu
@@ -164,6 +228,7 @@ string valProductores;
 
 Glista lista2 = NULL; //Glista -> Lista de los generos
 Plista lista1 = NULL; //Plista -> Lista de las peliculas
+Prolista lista3 = NULL; //Prolista -> Lista de los productores
 
 do{
 
@@ -201,6 +266,10 @@ switch (opcionMultiple){
         cin >> valGenero;
         insertarGenero(lista2, valGenero);
 
+        cout<< "\n Productor: ";
+        cin >> valProductores;
+        insertarProductor(lista3, valProductores);
+
         system("pause");
         break;
 
@@ -227,6 +296,7 @@ switch (opcionMultiple){
         cout << "\n\nMostrando la Informacion\n\n";
         reportarListaPelicula(lista1);
         reportarListaGenero(lista2);
+        reportarListaProductor(lista3);
         system("pause");
         break;
 
