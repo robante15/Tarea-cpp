@@ -23,8 +23,50 @@ La interfaz de usuario y las validaciones tienen un 40% de ponderación.
 fecha de entrega Jueves 11.
 */
 
-//Estructura del nodo a utilizar
 
+//Todo el codigo para trabajar con genero
+struct nodoGenero{
+       string genero;
+       struct nodoGenero *sgte;
+};
+
+typedef struct nodoGenero *Glista;
+
+void insertarGenero(Glista &lista, string valor1)
+{
+    Glista t, g = new(struct nodoGenero);
+
+    g->genero= valor1;
+
+    g->sgte = NULL;
+
+    if(lista==NULL)
+    {
+        lista = g;
+    }
+    else
+    {
+        t = lista;
+        while(t->sgte!=NULL)
+        {
+            t = t->sgte;
+        }
+        t->sgte = g;
+    }
+}
+
+void reportarListaGenero(Glista lista)
+{
+     int i = 0;
+
+     while(lista != NULL)
+     {
+          cout <<' '<< i+1 <<") ";
+          cout << white << "Genero: " << normal <<lista->genero << endl << endl;
+          lista = lista->sgte;
+          i++;
+     }
+}
 
 int main(){
 
@@ -32,8 +74,10 @@ int main(){
 bool menuShido = true;
 int opcionMultiple;
 string valPelicula;
-string valGenerlo;
+string valGenero;
 string valProductores;
+
+Glista lista = NULL; //Glista -> Lista de los generos
 
 do{
 
@@ -60,13 +104,16 @@ switch (opcionMultiple){
 
     case 1:
         system("cls");
-        cout<<"Opcion 1"<<endl;
+
+        cout<< "\n Genero: ";
+        cin >> valGenero;
+        insertarGenero(lista, valGenero);
+
         system("pause");
         break;
 
     case 2:
         system("cls");
-        cout<<"Opcion 2"<<endl;
         system("pause");
         break;
 
@@ -84,7 +131,8 @@ switch (opcionMultiple){
 
     case 5:
         system("cls");
-        cout<<"Opcion 5"<<endl;
+        cout << "\n\nMostrando la Informacion\n\n";
+        reportarListaGenero(lista);
         system("pause");
         break;
 
