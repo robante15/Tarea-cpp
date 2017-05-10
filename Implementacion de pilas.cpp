@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <string.h>
+#include <conio.h>
 #include "concolor.h"
 
 using namespace std;
@@ -30,7 +31,7 @@ int main(){
 
 //Variables necesarias para gestionar el menu
 bool menuShido = true;
-int opcionMultiple;
+char opcionMultiple;
 string valPelicula;
 string valGenerlo;
 string valProductores;
@@ -54,46 +55,47 @@ cout << white <<"Opcion 5. " << normal <<"Listar los elementos en las listas."<<
 cout << white <<"Opcion 6. " << normal <<"Salir.\n"<< endl;
 
 cout << white <<"Ingrese una opcion: " << normal;
-cin>>opcionMultiple;
+opcionMultiple = getch();
 
 switch (opcionMultiple){
 
-    case 1:
+    case '1':
         system("cls");
         cout<<"Opcion 1"<<endl;
         system("pause");
         break;
 
-    case 2:
+    case '2':
         system("cls");
         cout<<"Opcion 2"<<endl;
         system("pause");
         break;
 
-    case 3:
+    case '3':
         system("cls");
         cout<<"Opcion 3"<<endl;
         system("pause");
         break;
 
-    case 4:
+    case '4':
         system("cls");
         cout<<"Opcion 4"<<endl;
         system("pause");
         break;
 
-    case 5:
+    case '5':
         system("cls");
         cout<<"Opcion 5"<<endl;
         system("pause");
         break;
 
-    case 6:
+    case '6':
         system("CLS");
         menuShido = false;
         break;
 
     default:
+    	system("cls");
         cout<<"Error: Ingrese una opcion correcta."<<endl;
         system("pause");
         break;
