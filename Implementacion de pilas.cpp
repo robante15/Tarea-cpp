@@ -193,12 +193,12 @@ switch (opcionMultiple){
         system("cls");
 
         cout<< "\n Pelicula: ";
-        cin >> valPelicula;
+        getline(cin,valPelicula);
         insertarPelicula(lista1, valPelicula);
 
 
         cout<< "\n Genero: ";
-        cin >> valGenero;
+        getline(cin,valGenero);
         insertarGenero(lista2, valGenero);
 
         system("pause");
