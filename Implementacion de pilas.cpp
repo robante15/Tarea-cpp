@@ -65,6 +65,8 @@ void reportarListaPelicula(Plista lista1)
      {
           cout <<' '<< i+1 <<") ";
           cout << white << "Pelicula: " << normal <<lista1->pelicula << endl << endl;
+          cout << white << "Genero: " << normal <<lista1->genero << endl << endl;
+          cout << white << "Productor: " << normal <<lista1->productor << endl << endl;
           lista1 = lista1->sgte;
           i++;
      }
@@ -315,6 +317,7 @@ opcionMultiple = getch();
 
 switch (opcionMultiple){
 
+//CASE 1: AGREGAR ELEMENTOS
     case '1':
         system("cls");
         do{
@@ -355,11 +358,16 @@ switch (opcionMultiple){
         getline(cin,valPelicula);
         insertarPelicula(lista1, valPelicula);
         */
+
+//CASE 2: MODIFICAR ELEMENTOS
     case '2':
         system("cls");
+        //cout<<"\n Genero a modificar: "; cin>> valGenero;
+        //modificarElementoGenero(lista2, valGenero);
         system("pause");
         break;
 
+//CASE 3: BUSCAR PELICULA
     case '3':
         system("cls");
         cout<<"\n Pelicula a buscar: "; cin>> valPelicula;
@@ -367,7 +375,7 @@ switch (opcionMultiple){
         system("pause");
         break;
 
-    //CASE 4: ELIMINAR ELEMENTOS
+//CASE 4: ELIMINAR ELEMENTOS
     case '4':
         system("cls");
         do{
@@ -406,6 +414,7 @@ switch (opcionMultiple){
     case '5':
         system("cls");
         do{
+            system("cls");
             cout << white <<"Opcion 1. " << normal <<"Mostrar Peliculas."<< endl;
             cout << white <<"Opcion 2. " << normal <<"Mostrar Generos."<< endl;
             cout << white <<"Opcion 3. " << normal <<"Mostrar Productores."<< endl;
@@ -415,22 +424,23 @@ switch (opcionMultiple){
                     switch (OPTemporal){
                         case '1':
                             system("cls");
-                            cout << "\n\nMostrando la Informacion\n\n";
+                            cout << "Mostrando las Peliculas\n\n";
                             reportarListaPelicula(lista1);
+                            system("pause");
                             break;
 
                         case '2':
                             system("cls");
-                            cout << "\n\nMostrando los Generos:\n\n";
+                            cout << "Mostrando los Generos:\n\n";
                             reportarListaGenero(lista2);
-                            submenu = false;
+                            system("pause");
                             break;
 
                         case '3':
                             system("cls");
-                            cout << "\n\nMostrando la Informacion\n\n";
+                            cout << "Mostrando la Informacion\n\n";
                             reportarListaProductor(lista3);
-                            submenu = false;
+                            system("pause");
                             break;
 
                         case '4':
