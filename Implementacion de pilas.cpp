@@ -38,14 +38,37 @@ struct nodoPelicula{
 typedef struct nodoPelicula *Plista;
 
 void bannerInsertar(){
-                            system("cls");
-                            cout << white << "      ------------------------------------------" << endl;
-                            cout << white << "      |                                        |"<< endl;
-                            cout << white << "      |      Ingresando nuevos elementos       |"<< endl;
-                            cout << white << "      |                                        |"<< endl;
-                            cout << white << "      ------------------------------------------\n" << endl;
+                            //system("cls");
+cout << white << "      ------------------------------------------" << endl;
+cout << white << "      |                                        |"<< endl;
+cout << white << "      |      Ingresando nuevos elementos       |"<< endl;
+cout << white << "      |                                        |"<< endl;
+cout << white << "      ------------------------------------------\n" << endl;
 }
 
+void bannerEliminar(){
+            //system("cls");
+cout << white << "      ------------------------------------------" << endl;
+cout << white << "      |                                        |"<< endl;
+cout << white << "      |           Eliminar elementos           |"<< endl;
+cout << white << "      |                                        |"<< endl;
+cout << white << "      ------------------------------------------\n" << endl;
+}
+void bannerListar(){
+cout << white << "      ------------------------------------------" << endl;
+cout << white << "      |                                        |"<< endl;
+cout << white << "      |            Listar elementos            |"<< endl;
+cout << white << "      |                                        |"<< endl;
+cout << white << "      ------------------------------------------\n" << endl;
+}
+
+void bannerBuscar(){
+cout << white << "      ------------------------------------------" << endl;
+cout << white << "      |                                        |"<< endl;
+cout << white << "      |          Busqueda de Pelicula          |"<< endl;
+cout << white << "      |                                        |"<< endl;
+cout << white << "      ------------------------------------------\n" << endl;
+}
 
 void insertarPelicula(Plista &lista1, string valor1, string valor2, string valor3)
 {
@@ -103,6 +126,8 @@ void buscarElementoPelicula(Plista lista1, string valor1)
     }
 
     if(band==0)
+        system("CLS");
+        bannerBuscar();
         cout<< red <<"Error: Pelicula no encontrada." << normal << endl;
 }
 
@@ -559,11 +584,7 @@ switch (opcionMultiple){
 //CASE 3: BUSCAR PELICULA
     case '3':
         system("cls");
-        cout << white << "      ------------------------------------------" << endl;
-        cout << white << "      |                                        |"<< endl;
-        cout << white << "      |          Busqueda de Pelicula          |"<< endl;
-        cout << white << "      |                                        |"<< endl;
-        cout << white << "      ------------------------------------------\n" << endl;
+        bannerBuscar();
         cout<< white <<"Pelicula a buscar: " << normal;
         cin>> valPelicula;
         buscarElementoPelicula(lista1, valPelicula);
@@ -572,13 +593,9 @@ switch (opcionMultiple){
 
 //CASE 4: ELIMINAR ELEMENTOS
     case '4':
-        system("cls");
         do{
-            cout << white << "      ------------------------------------------" << endl;
-            cout << white << "      |                                        |"<< endl;
-            cout << white << "      |           Eliminar elementos           |"<< endl;
-            cout << white << "      |                                        |"<< endl;
-            cout << white << "      ------------------------------------------\n" << endl;
+            system("cls");
+            bannerEliminar();
             cout << white <<"Opcion 1. " << normal <<"Eliminar Pelicula."<< endl;
             cout << white <<"Opcion 2. " << normal <<"Eliminar Genero."<< endl;
             cout << white <<"Opcion 3. " << normal <<"Eliminar Productor."<< endl;
@@ -587,18 +604,21 @@ switch (opcionMultiple){
             system("cls");
                     switch (OPTemporal){
                         case '1':
+                            bannerEliminar();
                             cout<< white << "Pelicula: " << normal;
                             getline(cin,valPelicula);
                             eliminarElementoPelicula(lista1, valPelicula);
                             break;
 
                         case '2':
+                            bannerEliminar();
                             cout<< white <<"Genero: " << normal;
                             getline(cin,valGenero);
                             eliminarElementoGenero(lista2, valGenero);
                             break;
 
                         case '3':
+                            bannerEliminar();
                             cout<< white << "Productor: " << normal;
                             getline(cin,valProductores);
                             eliminarElementoProductores(lista3, valProductores);
@@ -617,12 +637,7 @@ switch (opcionMultiple){
         system("cls");
         do{
             system("cls");
-            cout << white << "      ------------------------------------------" << endl;
-            cout << white << "      |                                        |"<< endl;
-            cout << white << "      |            Listar elementos            |"<< endl;
-            cout << white << "      |                                        |"<< endl;
-            cout << white << "      ------------------------------------------\n" << endl;
-
+            bannerListar();
             cout << white <<"Opcion 1. " << normal <<"Mostrar Peliculas."<< endl;
             cout << white <<"Opcion 2. " << normal <<"Mostrar Generos."<< endl;
             cout << white <<"Opcion 3. " << normal <<"Mostrar Productores."<< endl;
@@ -632,6 +647,7 @@ switch (opcionMultiple){
                     switch (OPTemporal){
                         case '1':
                             system("cls");
+                            bannerListar();
                             cout << white << "Mostrando las Peliculas"<< normal <<endl;
                             reportarListaPelicula(lista1);
                             system("pause");
@@ -639,6 +655,7 @@ switch (opcionMultiple){
 
                         case '2':
                             system("cls");
+                            bannerListar();
                             cout << white << "Mostrando los Generos" << normal << endl;
                             reportarListaGenero(lista2);
                             system("pause");
@@ -646,6 +663,7 @@ switch (opcionMultiple){
 
                         case '3':
                             system("cls");
+                            bannerListar();
                             cout << white << "Mostrando la Informacion"<< normal << endl;
                             reportarListaProductor(lista3);
                             system("pause");
