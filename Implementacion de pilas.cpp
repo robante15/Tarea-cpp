@@ -24,6 +24,9 @@ La interfaz de usuario y las validaciones tienen un 40% de ponderación.
 fecha de entrega Jueves 11.
 */
 
+//Variables globales
+int idgeneroG = 1;
+int idproductorG = 1;
 //Todo el codigo para trabajar con pelicula
 struct nodoPelicula{
        string pelicula;
@@ -34,12 +37,14 @@ struct nodoPelicula{
 
 typedef struct nodoPelicula *Plista;
 
-void insertarPelicula(Plista &lista1, string valor1)
+
+void insertarPelicula(Plista &lista1, string valor1, string valor2, string valor3)
 {
     Plista t, p = new(struct nodoPelicula);
 
     p->pelicula= valor1;
-
+	p->genero= valor2;
+	p->productor = valor3;
     p->sgte = NULL;
 
     if(lista1==NULL)
@@ -94,19 +99,38 @@ void buscarElementoPelicula(Plista lista1, string valor1)
 //Todo el codigo para trabajar con genero
 struct nodoGenero{
        string genero;
+       int id;
        struct nodoGenero *sgte;
 };
 
 typedef struct nodoGenero *Glista;
 
-void insertarGenero(Glista &lista2, string valor1)
+string relaciongenero(Glista &lista2, int opc){
+	Glista g = lista2;
+    int i = 1, band = 0;
+
+    while(g!=NULL)
+    {
+        if(g->id==opc)
+        {
+           return g->genero;
+        }
+        g = g->sgte;
+        i++;
+    }
+
+    if(band==0)
+        cout<<"\n\n Genero no encontrado..!"<< endl;
+}
+
+void insertarGenero(Glista &lista2, string valor1,int valor2)
 {
     Glista t, g = new(struct nodoGenero);
 
     g->genero= valor1;
-
+	g->id = valor2;
     g->sgte = NULL;
-
+	idgeneroG++;
     if(lista2==NULL)
     {
         lista2 = g;
@@ -125,14 +149,19 @@ void insertarGenero(Glista &lista2, string valor1)
 void reportarListaGenero(Glista lista2)
 {
      int i = 0;
-
+	bool vacio = true;
      while(lista2 != NULL)
      {
           cout <<' '<< i+1 <<") ";
           cout << white << "Genero: " << normal <<lista2->genero << endl << endl;
           lista2 = lista2->sgte;
           i++;
+          vacio = false;
      }
+     
+    if(vacio)
+    cout << "La lista esta vacia" << endl;
+	 
 }
 
 void buscarElementoGenero(Glista lista2, string valor1)
@@ -177,6 +206,7 @@ void eliminarElementoGenero(Glista &lista2, string valor1)
             ant = g;
             g = g->sgte;
         }
+        idgeneroG--;
     }
     else
         cout << red <<"Error: Lista de generos vacia" << endl;
@@ -185,17 +215,36 @@ void eliminarElementoGenero(Glista &lista2, string valor1)
 //Todo el codigo para trabajar con productor
 struct nodoProductor{
        string productor;
+       int id;
        struct nodoProductor *sgte;
 };
 
 typedef struct nodoProductor *Prolista;
 
-void insertarProductor(Prolista &lista3, string valor1)
+string relacionproductor(Prolista &lista3, int opc){
+	Prolista g = lista3;
+    int i = 1, band = 0;
+
+    while(g!=NULL)
+    {
+        if(g->id==opc)
+        {
+           return g->productor;
+        }
+        g = g->sgte;
+        i++;
+    }
+
+    if(band==0)
+        cout<<"\n\n Productor no encontrado..!"<< endl;
+}
+
+void insertarProductor(Prolista &lista3, string valor1, int valor2)
 {
     Prolista t, pro = new(struct nodoProductor);
 
     pro->productor= valor1;
-
+	pro->id = valor2;
     pro->sgte = NULL;
 
     if(lista3==NULL)
@@ -211,19 +260,25 @@ void insertarProductor(Prolista &lista3, string valor1)
         }
         t->sgte = pro;
     }
+    idproductorG++;
 }
 
 void reportarListaProductor(Prolista lista3)
 {
      int i = 0;
-
+		bool vacio =  true;
      while(lista3 != NULL)
      {
           cout <<' '<< i+1 <<") ";
           cout << white << "Productor: " << normal <<lista3->productor << endl << endl;
           lista3 = lista3->sgte;
           i++;
+          vacio = false;
      }
+     
+     if(vacio)
+    cout << "La lista esta vacia" << endl;
+	 
 }
 
 void buscarElementoProductor(Prolista lista3, string valor1)
@@ -268,6 +323,7 @@ void eliminarElementoProductores(Prolista &lista3, string valor1)
             ant = pro;
             pro = pro->sgte;
         }
+        idproductorG--;
     }
     else
         cout<< red <<"Error: Lista de productores vacia" << endl;
@@ -283,6 +339,10 @@ bool submenu = true;
 string valPelicula;
 string valGenero;
 string valProductores;
+int optgenero;
+int optproductor;
+char optcgenero;
+char optcproductor;
 
 Glista lista2 = NULL; //Glista -> Lista de los generos
 Plista lista1 = NULL; //Plista -> Lista de las peliculas
@@ -326,20 +386,67 @@ switch (opcionMultiple){
             system("cls");
                     switch (OPTemporal){
                         case '1':
-                            cout << "Soy un case 1 xdxdxdxdxdddxdfxd" << endl;
+                            cout<< "\n Pelicula: " << endl;
+                            getline(cin,valPelicula);
+                            genero:
+							system("cls");
+                            reportarListaGenero(lista2);
+                            cout << "\n El genero esta en la lista? S/N" << endl;
+                            optcgenero = getch();
+                            system("cls");
+                            switch(optcgenero){
+                            	case 's':
+                            	case 'S':
+                            		reportarListaGenero(lista2);
+                            		cout << "\n Escriba el numero que le corresponda" << endl;
+                            		cin>>optgenero;                            
+                            		valGenero = relaciongenero(lista2,optgenero);
+                            		break;
+                            	case 'n':
+                            	case 'N':
+                            		cout<< "\n Genero: ";
+                            		getline(cin,valGenero);
+                            		insertarGenero(lista2, valGenero,idgeneroG);
+                            		goto genero;
+                            		break;
+							}
+							productor:
+								system("cls");
+                            reportarListaProductor(lista3);
+                            cout << "\n El productor esta en la lista? S/N" << endl;
+                            optcproductor = getch();
+                            system("cls");
+                            switch(optcproductor){
+                            	case 's':
+                            	case 'S':
+                            		reportarListaProductor(lista3);
+                            		cout << "\n Escriba el numero que le corresponda" << endl;
+                            		cin>>optproductor;                            
+                            		valProductores = relacionproductor(lista3,optproductor);
+                            		break;
+                            	case 'n':
+                            	case 'N':
+                            		cout<< "\n Productor: ";
+                            		//getline(cin,valProductores);
+                            		cin >> valProductores;
+                            		insertarProductor(lista3, valProductores,idproductorG);
+                            		goto productor;
+                            		break;
+							}
+							       insertarPelicula(lista1,valPelicula,valGenero,valProductores);                    
                             break;
 
                         case '2':
                             cout<< "\n Genero: ";
                             getline(cin,valGenero);
-                            insertarGenero(lista2, valGenero);
+                            insertarGenero(lista2, valGenero,idgeneroG);
                             submenu = false;
                             break;
 
                         case '3':
                             cout<< "\n Productor: ";
                             cin >> valProductores;
-                            insertarProductor(lista3, valProductores);
+                            insertarProductor(lista3, valProductores, idproductorG);
                             submenu = false;
                             break;
 
