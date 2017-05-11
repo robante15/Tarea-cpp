@@ -221,6 +221,8 @@ void buscarElementoProductor(Prolista lista3, string valor1)
 
 int main(){
 
+menu:
+
 //Variables necesarias para gestionar el menu
 bool menuShido = true;
 char opcionMultiple;
@@ -288,6 +290,7 @@ switch (opcionMultiple){
 
                         case '4':
                             submenu = false;
+                            goto menu;
                     };
 
         }while(submenu = true);
