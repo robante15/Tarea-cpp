@@ -275,9 +275,6 @@ void eliminarElementoProductores(Prolista &lista3, string valor1)
 
 int main(){
 
-//Checkpoint para cargar partidas guardadas :v xdxdxdxdxxxdxdxd
-menu:
-
 //Variables necesarias para gestionar el menu
 bool menuShido = true;
 char opcionMultiple;
@@ -290,6 +287,9 @@ string valProductores;
 Glista lista2 = NULL; //Glista -> Lista de los generos
 Plista lista1 = NULL; //Plista -> Lista de las peliculas
 Prolista lista3 = NULL; //Prolista -> Lista de los productores
+
+//Checkpoint para cargar partidas guardadas :v xdxdxdxdxxxdxdxd
+menu:
 
 do{
 
@@ -421,7 +421,7 @@ switch (opcionMultiple){
 
                         case '2':
                             system("cls");
-                            cout << "\n\nMostrando la Informacion\n\n";
+                            cout << "\n\nMostrando los Generos:\n\n";
                             reportarListaGenero(lista2);
                             submenu = false;
                             break;
