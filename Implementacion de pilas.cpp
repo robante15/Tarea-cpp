@@ -27,6 +27,8 @@ fecha de entrega Jueves 11.
 //Todo el codigo para trabajar con pelicula
 struct nodoPelicula{
        string pelicula;
+       string genero;
+       string productor;
        struct nodoPelicula *sgte;
 };
 
@@ -222,6 +224,8 @@ int main(){
 //Variables necesarias para gestionar el menu
 bool menuShido = true;
 char opcionMultiple;
+char OPTemporal;
+bool submenu = true;
 string valPelicula;
 string valGenero;
 string valProductores;
@@ -256,23 +260,44 @@ switch (opcionMultiple){
 
     case '1':
         system("cls");
+        do{
+            cout << white <<"Opcion 1. " << normal <<"Agregar Pelicula."<< endl;
+            cout << white <<"Opcion 2. " << normal <<"Agregar Genero."<< endl;
+            cout << white <<"Opcion 3. " << normal <<"Agregar Productor."<< endl;
+            cout << white <<"Opcion 4. " << normal <<"Retroceder."<< endl;
+            OPTemporal = getch();
+            system("cls");
+                    switch (OPTemporal){
+                        case '1':
+                            cout << "Soy un case 1 xdxdxdxdxdddxdfxd" << endl;
+                            break;
 
+                        case '2':
+                            cout<< "\n Genero: ";
+                            getline(cin,valGenero);
+                            insertarGenero(lista2, valGenero);
+                            submenu = false;
+                            break;
+
+                        case '3':
+                            cout<< "\n Productor: ";
+                            cin >> valProductores;
+                            insertarProductor(lista3, valProductores);
+                            submenu = false;
+                            break;
+
+                        case '4':
+                            submenu = false;
+                    };
+
+        }while(submenu = true);
+        break;
+
+        /*
         cout<< "\n Pelicula: ";
         getline(cin,valPelicula);
         insertarPelicula(lista1, valPelicula);
-
-
-        cout<< "\n Genero: ";
-        getline(cin,valGenero);
-        insertarGenero(lista2, valGenero);
-
-        cout<< "\n Productor: ";
-        cin >> valProductores;
-        insertarProductor(lista3, valProductores);
-
-        system("pause");
-        break;
-
+        */
     case '2':
         system("cls");
         system("pause");
