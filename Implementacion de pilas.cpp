@@ -692,5 +692,3 @@ switch (opcionMultiple){
 
 return 0;
 }
-
-
