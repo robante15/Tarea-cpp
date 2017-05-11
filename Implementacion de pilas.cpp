@@ -37,6 +37,15 @@ struct nodoPelicula{
 
 typedef struct nodoPelicula *Plista;
 
+void bannerInsertar(){
+                            system("cls");
+                            cout << white << "      ------------------------------------------" << endl;
+                            cout << white << "      |                                        |"<< endl;
+                            cout << white << "      |      Ingresando nuevos elementos       |"<< endl;
+                            cout << white << "      |                                        |"<< endl;
+                            cout << white << "      ------------------------------------------\n" << endl;
+}
+
 
 void insertarPelicula(Plista &lista1, string valor1, string valor2, string valor3)
 {
@@ -94,9 +103,35 @@ void buscarElementoPelicula(Plista lista1, string valor1)
     }
 
     if(band==0)
-        cout<< red <<"\n\nError: Pelicula no encontrada."<< endl;
+        cout<< red <<"Error: Pelicula no encontrada." << normal << endl;
 }
 
+void eliminarElementoPelicula(Plista &lista1, string valor1)
+{
+    Plista p, ant;
+    p = lista1;
+
+    if(lista1!=NULL)
+    {
+        while(p!=NULL)
+        {
+            if(p->pelicula==valor1)
+            {
+                if(p==lista1)
+                    lista1 = lista1->sgte;
+                else
+                    ant->sgte = p->sgte;
+
+                delete(p);
+                return;
+            }
+            ant = p;
+            p = p->sgte;
+        }
+    }
+    else
+        cout<< red <<"Error: Lista vacia." << normal << endl;
+}
 
 //Todo el codigo para trabajar con genero
 struct nodoGenero{
@@ -122,7 +157,7 @@ string relaciongenero(Glista &lista2, int opc){
     }
 
     if(band==0)
-        cout<<"\n\n Genero no encontrado..!"<< endl;
+        cout<< red <<"Error: Genero no encontrado." << normal << endl;
 }
 
 void insertarGenero(Glista &lista2, string valor1,int valor2)
@@ -160,10 +195,10 @@ void reportarListaGenero(Glista lista2)
           i++;
           vacio = false;
      }
-     
+
     if(vacio)
-    cout << "La lista esta vacia" << endl;
-	 
+    cout<< red << "Error: La lista esta vacia" << normal  << endl;
+
 }
 
 void buscarElementoGenero(Glista lista2, string valor1)
@@ -183,7 +218,7 @@ void buscarElementoGenero(Glista lista2, string valor1)
     }
 
     if(band==0)
-        cout<<"\n\n Genero no encontrado..!"<< endl;
+        cout<< red <<"Error: Genero no encontrado" << normal << endl;
 }
 
 void eliminarElementoGenero(Glista &lista2, string valor1)
@@ -211,7 +246,7 @@ void eliminarElementoGenero(Glista &lista2, string valor1)
         idgeneroG--;
     }
     else
-        cout << red <<"Error: Lista de generos vacia" << endl;
+        cout << red <<"Error: Lista de generos vacia." << normal << endl;
 }
 
 //Todo el codigo para trabajar con productor
@@ -238,7 +273,7 @@ string relacionproductor(Prolista &lista3, int opc){
     }
 
     if(band==0)
-        cout<<"\n\n Productor no encontrado..!"<< endl;
+        cout<< red <<"Error: Productor no encontrado." << normal << endl;
 }
 
 void insertarProductor(Prolista &lista3, string valor1, int valor2)
@@ -277,10 +312,10 @@ void reportarListaProductor(Prolista lista3)
           i++;
           vacio = false;
      }
-     
+
      if(vacio)
-    cout << "La lista esta vacia" << endl;
-	 
+    cout << red << "Error: La lista esta vacia" << normal  << endl;
+
 }
 
 void buscarElementoProductor(Prolista lista3, string valor1)
@@ -300,7 +335,7 @@ void buscarElementoProductor(Prolista lista3, string valor1)
     }
 
     if(band==0)
-        cout<<"\n\n Productor no encontrado..!"<< endl;
+        cout<< red <<"Error: Productor no encontrado." << normal << endl;
 }
 
 void eliminarElementoProductores(Prolista &lista3, string valor1)
@@ -328,7 +363,7 @@ void eliminarElementoProductores(Prolista &lista3, string valor1)
         idproductorG--;
     }
     else
-        cout<< red <<"Error: Lista de productores vacia" << endl;
+        cout<< red <<"Error: Lista de productores vacia" << normal  << endl;
 }
 
 int main(){
@@ -357,19 +392,19 @@ do{
 
 system("CLS");
 
-cout << white << "------------------------------------------" << endl;
-cout << white << "|         Listas enlazadas simples       |"<< endl;
-cout << white << "|                                        |"<< endl;
-cout << white << "|    Genero, Peliculas y Productores     |"<< endl;
-cout << white << "------------------------------------------\n" << endl;
+cout << white << "          ------------------------------------------" << endl;
+cout << white << "          |                  Listas                |"<< endl;
+cout << white << "          |                                        |"<< endl;
+cout << white << "          |    Genero, Peliculas y Productores     |"<< endl;
+cout << white << "          ------------------------------------------\n" << endl;
 
 
-cout << white <<"Opcion 1. " << normal <<"Agregar elementos a las pilas."<< endl;
-cout << white <<"Opcion 2. " << normal <<"Modificar elementos en las pilas."<< endl;
-cout << white <<"Opcion 3. " << normal <<"Buscar elementos en las pilas."<< endl;
-cout << white <<"Opcion 4. " << normal <<"Eliminar elementos de las pilas."<< endl;
-cout << white <<"Opcion 5. " << normal <<"Listar los elementos en las listas."<< endl;
-cout << white <<"Opcion 6. " << normal <<"Salir.\n"<< endl;
+cout << white << " -------------------------------------------------------------" << endl;
+cout << white <<" |        1. " << normal <<"Agregar." << white << "          |"  <<"          4. " << normal <<"Eliminar."<< white <<"       |"<< endl;
+cout << white <<" |        2. " << normal <<"Modificar."<< white << "        |" <<"          5. " << normal <<"Mostrar."<< white <<"        |"<< endl;
+cout << white <<" |        3. " << normal <<"Buscar." << white << "           |" <<"          6. " << normal <<"Salir." << white <<"          |"<< endl;
+cout << white << " -------------------------------------------------------------\n" << endl;
+
 
 cout << white <<"Ingrese una opcion: " << normal;
 
@@ -379,8 +414,11 @@ switch (opcionMultiple){
 
 //CASE 1: AGREGAR ELEMENTOS
     case '1':
-        system("cls");
+
         do{
+            system("cls");
+            bannerInsertar();
+
             cout << white <<"Opcion 1. " << normal <<"Agregar Pelicula."<< endl;
             cout << white <<"Opcion 2. " << normal <<"Agregar Genero."<< endl;
             cout << white <<"Opcion 3. " << normal <<"Agregar Productor."<< endl;
@@ -389,20 +427,30 @@ switch (opcionMultiple){
             system("cls");
                     switch (OPTemporal){
                         case '1':
-                            cout<< "\n Pelicula: " << endl;
+                            bannerInsertar();
+
+                            cout<<white<< "\n Pelicula: "<<normal;
                             getline(cin,valPelicula);
                             genero:
 							system("cls");
+
+							bannerInsertar();
+
+
                             reportarListaGenero(lista2);
-                            cout << "\n El genero esta en la lista? S/N" << endl;
+                            cout << "\nEl genero esta en la lista? S/N" << endl;
                             optcgenero = getch();
-                            system("cls");
+                            //VALICADION PARA NO METERLE INCORRECTOS
+                            if(optcgenero == 'S' ||optcgenero == 's' ||optcgenero == 'N' ||optcgenero == 'n'){
+                                system("cls");
+                            bannerInsertar();
+
                             switch(optcgenero){
                             	case 's':
                             	case 'S':
                             		reportarListaGenero(lista2);
-                            		cout << "\n Escriba el numero que le corresponda" << endl;
-                            		cin>>optgenero;                            
+                            		cout << "\nEscriba el numero que le corresponda: ";
+                            		cin>>optgenero;
                             		valGenero = relaciongenero(lista2,optgenero);
                             		break;
                             	case 'n':
@@ -413,18 +461,34 @@ switch (opcionMultiple){
                             		goto genero;
                             		break;
 							}
+							}
+
+                            else{
+
+                                system("cls");
+                                cout << red << "Error: Opcion seleccionada incorrecta\n" << normal <<endl;
+                                system("pause");
+                                goto genero;
+                            }
+
 							productor:
-								system("cls");
+                            system("cls");
+                            bannerInsertar();
+
                             reportarListaProductor(lista3);
                             cout << "\n El productor esta en la lista? S/N" << endl;
+
                             optcproductor = getch();
+                            if(optcproductor == 'S' ||optcproductor == 's' ||optcproductor == 'N' ||optcproductor == 'n'){
                             system("cls");
+                            bannerInsertar();
+
                             switch(optcproductor){
                             	case 's':
                             	case 'S':
                             		reportarListaProductor(lista3);
-                            		cout << "\n Escriba el numero que le corresponda" << endl;
-                            		cin>>optproductor;                            
+                            		cout << "\n Escriba el numero que le corresponda: ";
+                            		cin>>optproductor;
                             		valProductores = relacionproductor(lista3,optproductor);
                             		break;
                             	case 'n':
@@ -436,10 +500,19 @@ switch (opcionMultiple){
                             		goto productor;
                             		break;
 							}
-							       insertarPelicula(lista1,valPelicula,valGenero,valProductores);                    
+							       insertarPelicula(lista1,valPelicula,valGenero,valProductores);
+                            }
+
+                            else{
+                               system("cls");
+                                cout << red << "Error: Opcion seleccionada incorrecta\n" << normal <<endl;
+                                system("pause");
+                                goto productor;
+                            }
                             break;
 
                         case '2':
+                            bannerInsertar();
                             cout<< "\n Genero: ";
                             getline(cin,valGenero);
                             insertarGenero(lista2, valGenero,idgeneroG);
@@ -447,6 +520,7 @@ switch (opcionMultiple){
                             break;
 
                         case '3':
+                            bannerInsertar();
                             cout<< "\n Productor: ";
                             cin >> valProductores;
                             insertarProductor(lista3, valProductores, idproductorG);
@@ -469,6 +543,14 @@ switch (opcionMultiple){
 //CASE 2: MODIFICAR ELEMENTOS
     case '2':
         system("cls");
+            cout << white << "      ------------------------------------------" << endl;
+            cout << white << "      |                                        |"<< endl;
+            cout << white << "      |    Modificando elementos existentes    |"<< endl;
+            cout << white << "      |                                        |"<< endl;
+            cout << white << "      ------------------------------------------\n" << endl;
+            cout << red << "WORK IN PROGRESS" << normal << endl;
+            system("Pause");
+            goto menu;
         //cout<<"\n Genero a modificar: "; cin>> valGenero;
         //modificarElementoGenero(lista2, valGenero);
         system("pause");
@@ -477,7 +559,13 @@ switch (opcionMultiple){
 //CASE 3: BUSCAR PELICULA
     case '3':
         system("cls");
-        cout<<"\n Pelicula a buscar: "; cin>> valPelicula;
+        cout << white << "      ------------------------------------------" << endl;
+        cout << white << "      |                                        |"<< endl;
+        cout << white << "      |          Busqueda de Pelicula          |"<< endl;
+        cout << white << "      |                                        |"<< endl;
+        cout << white << "      ------------------------------------------\n" << endl;
+        cout<< white <<"Pelicula a buscar: " << normal;
+        cin>> valPelicula;
         buscarElementoPelicula(lista1, valPelicula);
         system("pause");
         break;
@@ -486,6 +574,11 @@ switch (opcionMultiple){
     case '4':
         system("cls");
         do{
+            cout << white << "      ------------------------------------------" << endl;
+            cout << white << "      |                                        |"<< endl;
+            cout << white << "      |           Eliminar elementos           |"<< endl;
+            cout << white << "      |                                        |"<< endl;
+            cout << white << "      ------------------------------------------\n" << endl;
             cout << white <<"Opcion 1. " << normal <<"Eliminar Pelicula."<< endl;
             cout << white <<"Opcion 2. " << normal <<"Eliminar Genero."<< endl;
             cout << white <<"Opcion 3. " << normal <<"Eliminar Productor."<< endl;
@@ -494,18 +587,19 @@ switch (opcionMultiple){
             system("cls");
                     switch (OPTemporal){
                         case '1':
-                            cout << "Soy un case 1 xdxdxdxdxdddxdfxd" << endl;
+                            cout<< white << "Pelicula: " << normal;
+                            getline(cin,valPelicula);
+                            eliminarElementoPelicula(lista1, valPelicula);
                             break;
 
                         case '2':
-                            cout<< "\n Genero: ";
+                            cout<< white <<"Genero: " << normal;
                             getline(cin,valGenero);
                             eliminarElementoGenero(lista2, valGenero);
-                            submenu = false;
                             break;
 
                         case '3':
-                            cout<< "\n Productor: ";
+                            cout<< white << "Productor: " << normal;
                             getline(cin,valProductores);
                             eliminarElementoProductores(lista3, valProductores);
                             submenu = false;
@@ -518,10 +612,17 @@ switch (opcionMultiple){
         }while(submenu = true);
         break;
 
+//CASE 5: LISTAR ELEMENTOS
     case '5':
         system("cls");
         do{
             system("cls");
+            cout << white << "      ------------------------------------------" << endl;
+            cout << white << "      |                                        |"<< endl;
+            cout << white << "      |            Listar elementos            |"<< endl;
+            cout << white << "      |                                        |"<< endl;
+            cout << white << "      ------------------------------------------\n" << endl;
+
             cout << white <<"Opcion 1. " << normal <<"Mostrar Peliculas."<< endl;
             cout << white <<"Opcion 2. " << normal <<"Mostrar Generos."<< endl;
             cout << white <<"Opcion 3. " << normal <<"Mostrar Productores."<< endl;
@@ -531,21 +632,21 @@ switch (opcionMultiple){
                     switch (OPTemporal){
                         case '1':
                             system("cls");
-                            cout << "Mostrando las Peliculas\n\n";
+                            cout << white << "Mostrando las Peliculas"<< normal <<endl;
                             reportarListaPelicula(lista1);
                             system("pause");
                             break;
 
                         case '2':
                             system("cls");
-                            cout << "Mostrando los Generos:\n\n";
+                            cout << white << "Mostrando los Generos" << normal << endl;
                             reportarListaGenero(lista2);
                             system("pause");
                             break;
 
                         case '3':
                             system("cls");
-                            cout << "Mostrando la Informacion\n\n";
+                            cout << white << "Mostrando la Informacion"<< normal << endl;
                             reportarListaProductor(lista3);
                             system("pause");
                             break;
@@ -565,7 +666,7 @@ switch (opcionMultiple){
 
     default:
     	system("cls");
-        cout<< red <<"Error: Ingrese una opcion correcta."<<endl;
+        cout<< red <<"Error: Ingrese una opcion correcta." << normal <<endl;
         system("pause");
         break;
 }
