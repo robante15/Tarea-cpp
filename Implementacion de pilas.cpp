@@ -267,7 +267,7 @@ switch (opcionMultiple){
         insertarGenero(lista2, valGenero);
 
         cout<< "\n Productor: ";
-        cin >> valProductores;
+        getline(cin,valProductores)
         insertarProductor(lista3, valProductores);
 
         system("pause");
