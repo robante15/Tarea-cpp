@@ -8,7 +8,7 @@ using namespace std;
 //Lo de los colores lo saque de esta web: http://johny65corp.blogspot.com/2011/05/consola-con-colores-en-c.html
 
 /*
-Genero,Peliculas y Productores
+Genero,Peliculas y Productores.
 
 Hacer un sistema que permita:
 -Agregar
@@ -87,7 +87,7 @@ void buscarElementoPelicula(Plista lista1, string valor1)
     }
 
     if(band==0)
-        cout<<"\n\nError: Pelicula no encontrada."<< endl;
+        cout<< red <<"\n\nError: Pelicula no encontrada."<< endl;
 }
 
 
@@ -155,6 +155,33 @@ void buscarElementoGenero(Glista lista2, string valor1)
         cout<<"\n\n Genero no encontrado..!"<< endl;
 }
 
+void eliminarElementoGenero(Glista &lista2, string valor1)
+{
+    Glista g, ant;
+    g = lista2;
+
+    if(lista2!=NULL)
+    {
+        while(g!=NULL)
+        {
+            if(g->genero==valor1)
+            {
+                if(g==lista2)
+                    lista2 = lista2->sgte;
+                else
+                    ant->sgte = g->sgte;
+
+                delete(g);
+                return;
+            }
+            ant = g;
+            g = g->sgte;
+        }
+    }
+    else
+        cout << red <<"Error: Lista de generos vacia" << endl;
+}
+
 //Todo el codigo para trabajar con productor
 struct nodoProductor{
        string productor;
@@ -219,8 +246,36 @@ void buscarElementoProductor(Prolista lista3, string valor1)
         cout<<"\n\n Productor no encontrado..!"<< endl;
 }
 
+void eliminarElementoProductores(Prolista &lista3, string valor1)
+{
+    Prolista pro, ant;
+    pro = lista3;
+
+    if(lista3!=NULL)
+    {
+        while(pro!=NULL)
+        {
+            if(pro->productor==valor1)
+            {
+                if(pro==lista3)
+                    lista3 = lista3->sgte;
+                else
+                    ant->sgte = pro->sgte;
+
+                delete(pro);
+                return;
+            }
+            ant = pro;
+            pro = pro->sgte;
+        }
+    }
+    else
+        cout<< red <<"Error: Lista de productores vacia" << endl;
+}
+
 int main(){
 
+//Checkpoint para cargar partidas guardadas :v xdxdxdxdxxxdxdxd
 menu:
 
 //Variables necesarias para gestionar el menu
@@ -289,7 +344,6 @@ switch (opcionMultiple){
                             break;
 
                         case '4':
-                            submenu = false;
                             goto menu;
                     };
 
@@ -308,24 +362,83 @@ switch (opcionMultiple){
 
     case '3':
         system("cls");
-        cout<<"\n Valor a buscar: "; cin>> valGenero;
-        buscarElementoGenero(lista2, valGenero);
+        cout<<"\n Pelicula a buscar: "; cin>> valPelicula;
+        buscarElementoPelicula(lista1, valPelicula);
         system("pause");
         break;
 
+    //CASE 4: ELIMINAR ELEMENTOS
     case '4':
         system("cls");
-        cout<<"Opcion 4"<<endl;
-        system("pause");
+        do{
+            cout << white <<"Opcion 1. " << normal <<"Eliminar Pelicula."<< endl;
+            cout << white <<"Opcion 2. " << normal <<"Eliminar Genero."<< endl;
+            cout << white <<"Opcion 3. " << normal <<"Eliminar Productor."<< endl;
+            cout << white <<"Opcion 4. " << normal <<"Retroceder."<< endl;
+            OPTemporal = getch();
+            system("cls");
+                    switch (OPTemporal){
+                        case '1':
+                            cout << "Soy un case 1 xdxdxdxdxdddxdfxd" << endl;
+                            break;
+
+                        case '2':
+                            cout<< "\n Genero: ";
+                            getline(cin,valGenero);
+                            eliminarElementoGenero(lista2, valGenero);
+                            submenu = false;
+                            break;
+
+                        case '3':
+                            cout<< "\n Productor: ";
+                            getline(cin,valProductores);
+                            eliminarElementoProductores(lista3, valProductores);
+                            submenu = false;
+                            break;
+
+                        case '4':
+                            goto menu;
+                    };
+
+        }while(submenu = true);
         break;
 
     case '5':
         system("cls");
-        cout << "\n\nMostrando la Informacion\n\n";
-        reportarListaPelicula(lista1);
-        reportarListaGenero(lista2);
-        reportarListaProductor(lista3);
-        system("pause");
+        do{
+            cout << white <<"Opcion 1. " << normal <<"Mostrar Peliculas."<< endl;
+            cout << white <<"Opcion 2. " << normal <<"Mostrar Generos."<< endl;
+            cout << white <<"Opcion 3. " << normal <<"Mostrar Productores."<< endl;
+            cout << white <<"Opcion 4. " << normal <<"Retroceder."<< endl;
+            OPTemporal = getch();
+            system("cls");
+                    switch (OPTemporal){
+                        case '1':
+                            system("cls");
+                            cout << "\n\nMostrando la Informacion\n\n";
+                            reportarListaPelicula(lista1);
+                            break;
+
+                        case '2':
+                            system("cls");
+                            cout << "\n\nMostrando la Informacion\n\n";
+                            reportarListaGenero(lista2);
+                            submenu = false;
+                            break;
+
+                        case '3':
+                            system("cls");
+                            cout << "\n\nMostrando la Informacion\n\n";
+                            reportarListaProductor(lista3);
+                            submenu = false;
+                            break;
+
+                        case '4':
+                            goto menu;
+                            break;
+                    };
+
+        }while(submenu = true);
         break;
 
     case '6':
@@ -335,7 +448,7 @@ switch (opcionMultiple){
 
     default:
     	system("cls");
-        cout<<"Error: Ingrese una opcion correcta."<<endl;
+        cout<< red <<"Error: Ingrese una opcion correcta."<<endl;
         system("pause");
         break;
 }
